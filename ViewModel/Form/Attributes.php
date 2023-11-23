@@ -73,7 +73,7 @@ class Attributes implements ArgumentInterface
         $attributes = [];
         foreach ($this->attributeProvider->getAttributes($formCode) as  $attribute) {
 
-            if ($attribute->getIsVisible() && $attribute->getExtensionAttributes()->getCamAttribute() && $attribute->getExtensionAttributes()->getCamAttribute()->isVisible($this->getFormData())) {
+            if ($attribute->getIsVisible() && $attribute->getExtensionAttributes()->getCamAttribute()) {
                 $attributes[$attribute->getAttributeCode()] = $attribute;
             }
         }

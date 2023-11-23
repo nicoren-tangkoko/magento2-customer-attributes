@@ -75,7 +75,15 @@ define([
                     break;
                 case "Tangkoko\\CustomerAttributesManagement\\Model\\Rule\\Condition\\Address":
                 case "Tangkoko\\CustomerAttributesManagement\\Model\\Rule\\Condition\\Customer":
-                    const value = $("input[name="+ condition.attribute +"]:checked,select[name="+ condition.attribute +"]").val();
+                    let value = null;
+                    if($("input[name="+ condition.attribute +"]:checked,select[name="+ condition.attribute +"]").length > 0){
+                        value = $("input[name="+ condition.attribute +"]:checked,select[name="+ condition.attribute +"]").val();
+                    }else{
+                        value = self.options.config.model[condition.attribute];
+                    }
+                    if(value === null){
+                        return value;
+                    }
                     switch(condition.operator){
                         case "()":
                         case "{}":

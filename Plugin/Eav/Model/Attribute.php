@@ -13,10 +13,9 @@ use Magento\Eav\Model\Attribute as Subject;
 
 class Attribute
 {
-
-
     public function afterGetIsRequired(Subject $subject, $result)
     {
+
         if ($subject->hasCamIsRequired()) {
             return (bool)$result && $subject->getCamIsRequired();
         }

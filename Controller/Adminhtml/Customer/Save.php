@@ -292,30 +292,30 @@ class Save extends \Tangkoko\CustomerAttributesManagement\Controller\Adminhtml\C
             }
 
             $camAttribute = $model->getExtensionAttributes()->getCamAttribute();
+
             if (!$camAttribute) {
                 $camAttribute = $this->camAttributeFactory->create();
+                $model->getExtensionAttributes()->setCamAttribute($camAttribute);
             }
             $camAttribute->setAttributeId($model->getAttributeId());
-            $camAttribute->loadPost($data);
+            if (isset($data['rule'])) {
+                $camAttribute->loadPost($data);
+            }
 
 
             if (isset($data['rule']['required_conditions'])) {
                 $camAttribute->setRequiredConditionsSerialized($this->json->serialize($this->converter->dataModelToArray($camAttribute->getRequiredConditions())));
-            } else {
-                $camAttribute->setRequiredConditionsSerialized($this->json->serialize([]));
             }
             if (isset($data['rule']['conditions'])) {
                 $camAttribute->setVisibilityConditionsSerialized($this->json->serialize($this->converter->dataModelToArray($camAttribute->getVisibilityConditions())));
-            } else {
-                $camAttribute->setVisibilityConditionsSerialized($this->json->serialize([]));
             }
 
-
-            $model->getExtensionAttributes()->setCamAttribute($camAttribute);
-
             try {
-                $model->save();
+                $model->getExtensionAttributes()->setCamAttribute($camAttribute);
+                //$model->save();
                 $this->attributeRepository->save($model);
+
+
                 $this->messageManager->addSuccessMessage(__('You saved the customer attribute.'));
 
                 $this->attributeLabelCache->clean();

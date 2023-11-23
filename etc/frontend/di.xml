@@ -63,4 +63,5 @@
             <argument name="context" xsi:type="object">Tangkoko\CustomerAttributesManagement\Model\Context\FrontendContext</argument>
         </arguments>
     </type>
+    
 </config>

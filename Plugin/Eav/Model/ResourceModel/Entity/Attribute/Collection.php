@@ -11,6 +11,7 @@ namespace Tangkoko\CustomerAttributesManagement\Plugin\Eav\Model\ResourceModel\E
 use Tangkoko\CustomerAttributesManagement\Model\ResourceModel\CamAttribute\CollectionFactory;
 //use Magento\Customer\Model\ResourceModel\Attribute\Collection;
 //use Magento\Customer\Model\ResourceModel\Attribute\Collection;
+use Magento\Eav\Model\ResourceModel\Entity\Attribute\Collection as Subject;
 
 class Collection
 {
@@ -27,18 +28,17 @@ class Collection
         $this->collectionFactory = $collectionFactory;
     }
 
-    public function afterGetEntityAttributes(\Magento\Eav\Model\Config $subject, $result)
+    public function afterLoadWithFilter(Subject $subject, $result)
     {
 
-        $ids = array_map(function ($attribute) {
-            return $attribute->getAttributeId();
-        }, $result);
+        $ids = $subject->getColumnValues("attribute_id");
         /**
          * @var \Tangkoko\CustomerAttributesManagement\Model\ResourceModel\CamAttribute\Collection $collection
          */
         $collection = $this->collectionFactory->create()->addFieldToFilter("attribute_id", ["in" => $ids]);
 
-        foreach ($result as $item) {
+        foreach ($subject->getItems() as $item) {
+
             /**
              * @var \Magento\EAv\Model\Attribute $item
              */
@@ -47,7 +47,6 @@ class Collection
                 $item->getExtensionAttributes()->setCamAttribute($camAttribute);
             }
         }
-
         return $result;
     }
 }

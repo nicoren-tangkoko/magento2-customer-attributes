@@ -186,10 +186,10 @@ class CamAttribute extends AbstractModel implements CamAttributeInterface
 
         if (null === $conditions) {
             $conditions = $this->getConditionsInstance(['prefix' => 'conditions']);
-        }
-        $conditions->setRule($this)->setId('1');
-        $this->setVisibilityConditions($conditions);
 
+            $conditions->setRule($this)->setId('1');
+            $this->setVisibilityConditions($conditions);
+        }
         return $this;
     }
 

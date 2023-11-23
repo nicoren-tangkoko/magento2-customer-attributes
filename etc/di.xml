@@ -18,7 +18,7 @@
         <plugin name="cam_by_pass_attribute_validation" type="Tangkoko\CustomerAttributesManagement\Plugin\Eav\Model\Entity\Attribute\Backend"/>
     </type>
 
-    <type name="Magento\Eav\Model\Config">
+    <type name="Magento\Eav\Model\ResourceModel\Entity\Attribute\Collection">
         <plugin name="load_customer_cam_attributes" type="Tangkoko\CustomerAttributesManagement\Plugin\Eav\Model\ResourceModel\Entity\Attribute\Collection"/>
     </type>
 
@@ -29,7 +29,11 @@
 
     <type name="Magento\Eav\Model\Attribute">
         <plugin name="cam_getisrequired_with_conditions" type="Tangkoko\CustomerAttributesManagement\Plugin\Eav\Model\Attribute"></plugin>
-    </type> 
+    </type>
+
+    <type name="Magento\Eav\Model\Attribute\Data\AbstractData">
+        <plugin name="customer_attribute_validate_data" type="Tangkoko\CustomerAttributesManagement\Plugin\Customer\Model\Attribute\Data\AbstractData"/>
+    </type>
     
 
     <type name="Tangkoko\CustomerAttributesManagement\Model\Attribute\Source\ValidationRule">
