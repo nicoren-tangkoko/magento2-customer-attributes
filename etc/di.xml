@@ -35,6 +35,10 @@
         <plugin name="add_customer_cam_attributes" type="Tangkoko\CustomerAttributesManagement\Plugin\Customer\Model\AttributeMetadataDataProvider"/>
     </type>
 
+
+
+
+
     <type name="Magento\Eav\Model\Attribute">
         <plugin name="cam_getisrequired_with_conditions" type="Tangkoko\CustomerAttributesManagement\Plugin\Eav\Model\Attribute"></plugin>
     </type>

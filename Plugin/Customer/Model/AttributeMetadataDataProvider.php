@@ -12,6 +12,7 @@ use Magento\Customer\Model\AttributeMetadataDataProvider as Subject;
 use Tangkoko\CustomerAttributesManagement\Model\ResourceModel\CamAttribute\CollectionFactory;
 use Tangkoko\CustomerAttributesManagement\Model\Data\CamAttributeFactory;
 
+
 class AttributeMetadataDataProvider
 {
 

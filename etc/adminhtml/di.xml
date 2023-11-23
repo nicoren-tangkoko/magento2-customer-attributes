@@ -33,4 +33,12 @@
     <type name="Magento\Eav\Model\Validator\Attribute\Backend">
         <plugin name="cam_admin_set_validation_context" type="Tangkoko\CustomerAttributesManagement\Plugin\Eav\Model\Validator\Attribute\Backend"/>
     </type>
+
+    <type name="Magento\Customer\Model\Metadata\CustomerCachedMetadata">
+        <plugin name="add_customer_cam_attributes_to_customer_metadata" type="Tangkoko\CustomerAttributesManagement\Plugin\Customer\Model\Metadata\CustomerCachedMetadata"/>
+    </type>
+
+    <type name="Magento\Customer\Model\Metadata\AddressCachedMetadata">
+        <plugin name="add_customer_cam_attributes_to_address_metadata" type="Tangkoko\CustomerAttributesManagement\Plugin\Customer\Model\Metadata\AddressCachedMetadata"/>
+    </type>
 </config>
