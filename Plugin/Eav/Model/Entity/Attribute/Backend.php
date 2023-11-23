@@ -35,17 +35,21 @@ class Backend
         /**
          * @var \Magento\Eav\Model\Entity\Attribute\AbstractAttribute
          */
-        $attribute = $subject->getAttribute();
 
+        $attribute = $subject->getAttribute();
         if (!in_array($subject->getAttribute()->getEntityType()->getEntityTypeCode(), [AddressMetadataInterface::ENTITY_TYPE_ADDRESS, CustomerMetadataInterface::ENTITY_TYPE_CUSTOMER]) || !$attribute->getExtensionAttributes() || !$attribute->getExtensionAttributes()->getCamAttribute()) {
             return $proceed($object);
         }
+
+
         $byPassRequired = false;
         if ($attribute->getIsRequired() && $attribute->getExtensionAttributes()->getCamAttribute()) {
             $byPassRequired = true;
             $isRequired = $attribute->getExtensionAttributes()->getCamAttribute()->isRequired($this->context->getCustomer());
             $attribute->setCamIsRequired($isRequired);
         }
+
+
         $byPassValidate = false;
         if ($attribute->getIsVisible() && !$attribute->getExtensionAttributes()->getCamAttribute()->validate($object)) {
             $attribute->setData("scope_is_visible", false);

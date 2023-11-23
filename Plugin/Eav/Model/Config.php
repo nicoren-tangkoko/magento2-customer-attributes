@@ -1,19 +1,18 @@
 <?php
 
 /**
- * Created on Fri Feb 17 2023
+ * Created on Thu Nov 23 2023
  * @author : Nicolas RENAULT <nrenault@tangkoko.com>
  * @copyright (c) 2023 Tangkoko
  **/
 
-namespace Tangkoko\CustomerAttributesManagement\Plugin\Eav\Model\ResourceModel\Entity\Attribute;
+namespace Tangkoko\CustomerAttributesManagement\Plugin\Eav\Model;
 
 use Tangkoko\CustomerAttributesManagement\Model\ResourceModel\CamAttribute\CollectionFactory;
-use Magento\Framework\Model\ResourceModel\Db\Collection\AbstractCollection as Subject;
+use Magento\Eav\Model\Config as Subject;
 
-class Collection
+class Config
 {
-
     /**
      *
      * @var CollectionFactory
@@ -26,15 +25,21 @@ class Collection
         $this->collectionFactory = $collectionFactory;
     }
 
-    public function afterLoadWithFilter(Subject $subject, $result)
+    public function afterGetEntityAttributes(Subject $subject, $result)
     {
-        $ids = $subject->getColumnValues("attribute_id");
+
+        $ids = [];
+
+        foreach ($result as $attribute) {
+            $ids[] = $attribute->getAttributeId();
+        }
+
         /**
          * @var \Tangkoko\CustomerAttributesManagement\Model\ResourceModel\CamAttribute\Collection $collection
          */
         $collection = $this->collectionFactory->create()->addFieldToFilter("attribute_id", ["in" => $ids]);
 
-        foreach ($subject->getItems() as $item) {
+        foreach ($result as $item) {
 
             /**
              * @var \Magento\EAv\Model\Attribute $item
