@@ -23,8 +23,10 @@ class AbstractData
     {
         $attribute =  $subject->getAttribute();
         if ($attribute->getIsRequired() && $attribute->getExtensionAttributes()->getCamAttribute()) {
-            $isRequired = $attribute->getExtensionAttributes()->getCamAttribute()->isRequired($this->customerFactory->create([$attribute->getAttributeCode() => $value]));
-            $attribute->setCamIsRequired($isRequired);
+            $customer = $this->customerFactory->create([$attribute->getAttributeCode() => $value]);
+            $isRequired = $attribute->getExtensionAttributes()->getCamAttribute()->isRequired($customer);
+            $isVisible = $attribute->getExtensionAttributes()->getCamAttribute()->isVisible($customer);
+            $attribute->setCamIsRequired($isRequired && $isVisible);
         }
         return [$value];
     }
