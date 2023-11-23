@@ -18,8 +18,9 @@ define([
                 $.each(this.conditions, function(field, condition){
                     self.parseCondition(field, condition, self);
                     self.updateField(field);
-                    self.element.validate().resetForm();
+
                 });
+                self.element.validate().resetForm();
                 
             }
         },
