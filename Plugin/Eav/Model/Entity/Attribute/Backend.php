@@ -15,9 +15,9 @@ use Tangkoko\CustomerAttributesManagement\Model\Context\ContextInterface;
 class Backend
 {
 
-    private ContextInterface $context;
+    private ?ContextInterface $context=null;
 
-    public function __construct(ContextInterface $context)
+    public function __construct(?ContextInterface $context=null)
     {
         $this->context = $context;
     }
