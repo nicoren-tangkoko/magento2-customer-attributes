@@ -312,7 +312,7 @@ class Save extends \Tangkoko\CustomerAttributesManagement\Controller\Adminhtml\C
 
             try {
                 $model->getExtensionAttributes()->setCamAttribute($camAttribute);
-                //$model->save();
+                $model->save();
                 $this->attributeRepository->save($model);
 
 

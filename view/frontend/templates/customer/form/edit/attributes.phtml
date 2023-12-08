@@ -47,6 +47,12 @@ if ($_dobIsEnable) :
                         .after('<div class="' + errorClass + '"></div>');
                 }
                 else {
+                    if (element.attr('data-errors-message-box')) {
+                        messageBox = $(element.attr('data-errors-message-box'));
+                        messageBox.html(error);
+
+                        return;
+                    }
                     error.insertAfter(element);
                 }
             },
