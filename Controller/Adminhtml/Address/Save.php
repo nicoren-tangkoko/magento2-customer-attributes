@@ -202,8 +202,8 @@ class Save extends \Tangkoko\CustomerAttributesManagement\Controller\Adminhtml\A
                 }
             }
 
-            if ($model->getId()) {
-                if (!$attributeCode) {
+            if ($attributeCode) {
+                if (!$model->getId()) {
                     $this->messageManager->addErrorMessage(__('This attribute no longer exists.'));
                     return $this->returnResult('cam/*/', [], ['error' => true]);
                 }
@@ -291,18 +291,21 @@ class Save extends \Tangkoko\CustomerAttributesManagement\Controller\Adminhtml\A
             $camAttribute = $model->getExtensionAttributes()->getCamAttribute();
             if (!$camAttribute) {
                 $camAttribute = $this->camAttributeFactory->create();
+                $model->getExtensionAttributes()->setCamAttribute($camAttribute);
             }
-            $camAttribute->loadPost($data);
+            if (isset($data['rule'])) {
+                $camAttribute->loadPost($data);
+            }
 
+            if (isset($data['rule']['required_conditions'])) {
+                $camAttribute->setRequiredConditionsSerialized($this->json->serialize($this->converter->dataModelToArray($camAttribute->getRequiredConditions())));
+            }
             if (isset($data['rule']['conditions'])) {
-
-                $camAttribute->setAttributeId($model->getAttributeId())->setVisibilityConditionsSerialized($this->json->serialize($this->converter->dataModelToArray($camAttribute->getVisibilityConditions())));
-            } else {
-                $camAttribute->setAttributeId($model->getAttributeId())->setVisibilityConditionsSerialized($this->json->serialize([]));
+                $camAttribute->setVisibilityConditionsSerialized($this->json->serialize($this->converter->dataModelToArray($camAttribute->getVisibilityConditions())));
             }
-            $model->getExtensionAttributes()->setCamAttribute($camAttribute);
 
             try {
+                $model->getExtensionAttributes()->setCamAttribute($camAttribute);
                 $model->save();
                 $this->attributeRepository->save($model);
                 $this->messageManager->addSuccessMessage(__('You saved the customer address attribute.'));

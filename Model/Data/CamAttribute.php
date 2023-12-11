@@ -386,8 +386,6 @@ class CamAttribute extends AbstractModel implements CamAttributeInterface
     {
         $this->_resetConditions();
         $this->_resetRequiredConditions();
-
-
         $arr = $this->_convertFlatToRecursive($data['rule']);
 
 
