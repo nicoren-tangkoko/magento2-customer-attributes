@@ -165,7 +165,7 @@ class Conditions extends \Magento\Backend\Block\Widget\Form\Generic implements
      * @return \Magento\Framework\Data\Form
      * @throws \Magento\Framework\Exception\LocalizedException
      */
-    protected function addTabToForm($attribute, $fieldsetId = 'requiredconditions_fieldset', $formName = 'cam_customer_attributes_form')
+    protected function addTabToForm($attribute, $fieldsetId = 'requiredconditions_fieldset', $formName = 'cam_address_attributes_form')
     {
 
         $model = $attribute->getExtensionAttributes()->getCamAttribute();
