@@ -64,4 +64,7 @@
         </arguments>
     </type>
     
+    <type name="Magento\Checkout\Block\Checkout\LayoutProcessor">
+        <plugin name="cam_checkout_layoutprocessor" type="Tangkoko\CustomerAttributesManagement\Plugin\Checkout\Block\LayoutProcessor" sortOrder="100"/>
+    </type>
 </config>
