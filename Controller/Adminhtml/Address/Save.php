@@ -164,7 +164,7 @@ class Save extends \Tangkoko\CustomerAttributesManagement\Controller\Adminhtml\A
 
             $attributeId = $model->getId();
             if (strlen($attributeCode) > 0) {
-                $validatorAttrCode = new \Zend_Validate_Regex(
+                $validatorAttrCode = new \Laminas\Validator\Regex(
                     ['pattern' => '/^[a-zA-Z\x{600}-\x{6FF}][a-zA-Z\x{600}-\x{6FF}_0-9]{0,30}$/u']
                 );
                 if (!$validatorAttrCode->isValid($attributeCode)) {
